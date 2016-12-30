@@ -1,0 +1,10 @@
+google-api-python-client
+pendulum
+
+#install additional lib
+numpy
+audiolazy #https://github.com/danilobellini/audiolazy
+
+#installation on each os
+pydub #https://github.com/jiaaro/pydub#installation
+pyaudio #http://people.csail.mit.edu/hubert/pyaudio/
