@@ -4,6 +4,13 @@ pendulum
 #install additional lib
 numpy
 audiolazy #https://github.com/danilobellini/audiolazy
+numpy 
+matplotlib 
+scipy 
+sklearn 
+hmmlearn 
+simplejson 
+eyed3
 
 #installation on each os
 pydub #https://github.com/jiaaro/pydub#installation

@@ -1,8 +1,31 @@
+from pyAudioAnalysis import audioTrainTest as aT
+import glob, os, random
 
-from pyAudioAnalysis import audioBasicIO
-from pyAudioAnalysis import audioFeatureExtraction
-import matplotlib.pyplot as plt
-[Fs, x] = audioBasicIO.readAudioFile("sample.wav");
-F = audioFeatureExtraction.stFeatureExtraction(x, Fs, 0.050*Fs, 0.025*Fs);
-plt.subplot(2,1,1); plt.plot(F[0,:]); plt.xlabel('Frame no'); plt.ylabel('ZCR'); 
-plt.subplot(2,1,2); plt.plot(F[1,:]); plt.xlabel('Frame no'); plt.ylabel('Energy'); plt.show()
+basePath = 'trainning sound/'
+doorPath = basePath + 'door'
+hornPath = basePath + 'horn'
+motoPath = basePath + 'moto'
+
+startPath = os.getcwd()
+
+trainDirSet = [doorPath, hornPath, motoPath] 
+
+#listOfDirs, mtWin, mtStep, stWin, stStep, classifierType, modelName, computeBEAT=False, perTrain=0.90
+aT.featureAndTrain(trainDirSet, 1.0, 1.0, aT.shortTermWindow, aT.shortTermStep, "svm", "abc", computeBEAT=False, perTrain=0.90)
+
+#aT.featureAndTrain(["classifierData/music","classifierData/speech"], 1.0, 1.0, aT.shortTermWindow, aT.shortTermStep, "svm", "svmSMtemp", False)
+
+#%%
+pool = []
+for path in trainDirSet:
+    os.chdir(path)
+    for wav in glob.glob('*.wav'):
+        data = path+'/'+wav
+        pool.append(data)
+    os.chdir(startPath)
+
+#%%
+for i in range(3):
+    test = random.choice(pool)
+    print "classifying {}".format(test)
+    print aT.fileClassification(test, "abc","svm")
