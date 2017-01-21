@@ -7,6 +7,19 @@ import re
 
 googleDriveDir = "./googledriveDir"
 
+class Window(list):
+
+    def __init__(self,framerate,duration_ms):
+        super.__init__()
+        self.max_lenght = framerate * duration_ms/1000
+
+    def append(self, p_object):
+        super.append(p_object)
+
+        while len(self) > self.max_lenght:
+            self.pop(0)
+
+
 class microphone:
 
     def record1min(self):

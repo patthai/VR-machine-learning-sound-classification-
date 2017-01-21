@@ -1,5 +1,6 @@
 google-api-python-client
 pendulum
+pandas
 
 #install additional lib
 numpy
